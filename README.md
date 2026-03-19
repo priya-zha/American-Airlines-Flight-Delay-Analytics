@@ -1,3 +1,4 @@
+
 # ✈️ Flight Delay & Performance Analytics — American Airlines
 
 > **Operational insights from 700,000+ flight records at DFW Airport using Power BI & Python**
@@ -24,15 +25,31 @@ A **dimensional model (star schema)** was designed to structure raw data into fa
 
 ---
 
+## 📊 Dashboard Screenshots
+
+### Page 1 — Flight Delay Analysis by Time, Destination & Delay Type
+
+![Flight Delay Analysis](screenshots/dashboard_delay_analysis.png)
+
+> Departure delay trends over time, average flights per day vs average delays by destination airport, weather delay patterns, and delay breakdown by type (carrier, weather, late aircraft).
+
+---
+
+### Page 2 — Flight Performance Analysis by Airport, Aircraft & Schedule
+
+![Flight Performance Analysis](screenshots/dashboard_performance_analysis.png)
+
+> Flight delay breakdown by cause and destination airport, taxi-out time distribution by flight number, scheduled vs actual elapsed time comparison, and average departure delay by tail number.
+
+---
+
 ## 📁 Project Structure
 
 ```
 ├── American_Airlines_Flight_Analytics.pbix   # Power BI dashboard file
 ├── screenshots/                              # Dashboard screenshots
-│   ├── delay_causes_by_destination.png
-│   ├── scheduled_vs_actual_times.png
-│   ├── taxi_out_distribution.png
-│   └── departure_delays_by_tail_number.png
+│   ├── dashboard_delay_analysis.png
+│   └── dashboard_performance_analysis.png
 ├── data/                                     # Raw / processed data (if applicable)
 ├── analysis.py                               # Python data cleaning & analysis scripts
 └── README.md                                 # Project documentation
@@ -44,17 +61,23 @@ A **dimensional model (star schema)** was designed to structure raw data into fa
 
 ## 📊 Dashboard Highlights
 
-### 1. 🔴 Delay Causes by Destination Airport
-Bar charts breaking down delay causes (weather, carrier, late aircraft, NAS, security) per destination airport — revealing which routes are most delay-prone and why.
+### 1. 🔴 Delay Analysis by Time & Destination
+Average departure delays over the full year with spikes highlighted — weather and late aircraft dominate. Average flights per day vs average flight delays broken down by destination airport (LAX, PHX, MIA, SAT, LAS, etc.).
 
-### 2. 📈 Scheduled vs Actual Flight Times
-Line charts comparing scheduled departure/arrival times against actual times across all routes — exposing systemic scheduling inefficiencies.
+### 2. ⏱️ Delay Type Breakdown
+Multi-series time chart comparing weather delays, carrier delays, and late aircraft delays — revealing that **late aircraft arrival** is the primary compounding delay factor.
 
-### 3. 🛬 Taxi-Out Time Distribution by Flight Number
-Visualized taxi-out time distribution per flight number to assess ground delay patterns and identify high-congestion aircraft.
+### 3. ✈️ Flight Performance by Airport & Aircraft
+Stacked bar charts breaking down total delay minutes by cause (carrier, late aircraft, NAS, security, weather) per destination airport — SAT and LAX show the highest total delays.
 
-### 4. 🛩️ Departure Delays by Tail Number
-Correlation analysis of departure delays by individual tail numbers — identifying specific aircraft with persistent delay patterns, enabling targeted maintenance planning.
+### 4. 🛬 Taxi-Out Time Distribution by Flight Number
+Bar chart showing average taxi-out time across 3,500+ flight numbers — identifying congestion patterns and high-delay flight numbers.
+
+### 5. 🛩️ Departure Delays by Tail Number
+Scatter plot correlating tail numbers with average departure delay, colored by flight number — pinpointing specific aircraft with consistently poor on-time performance.
+
+### 6. 📅 Scheduled vs Actual Elapsed Time
+Line chart comparing scheduled vs actual elapsed flight times — revealing periods where actual flight times significantly diverge from schedule.
 
 ---
 
@@ -90,10 +113,12 @@ Correlation analysis of departure delays by individual tail numbers — identify
 
 ## 🔍 Key Insights
 
-- **Weather and late aircraft** are the top two causes of delays at DFW across most destination airports
+- **Late aircraft arrival** is the single largest driver of cascading delays across DFW routes
+- **SAT, LAX, and AUS** show the highest total delay volumes by destination
 - Certain **tail numbers** consistently show higher departure delay rates, suggesting maintenance or scheduling issues
 - **Taxi-out times** vary significantly by flight number, pointing to gate assignment and ground crew inefficiencies
-- **Scheduled vs actual time gaps** are widest on long-haul routes, indicating buffer time miscalculations
+- A notable **spike in departure delays** occurs in late November/December 2024 — likely weather-driven
+- **Scheduled vs actual time gaps** widen on specific routes and tail numbers, enabling targeted scheduling fixes
 
 ---
 
@@ -110,7 +135,7 @@ python analysis.py
 ### Power BI Dashboard
 1. Download `American_Airlines_Flight_Analytics.pbix` from this repo
 2. Open with [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free download)
-3. Explore the interactive dashboard
+3. Explore the interactive dashboard with Year, Destination Airport, and Flight Number filters
 
 ---
 
